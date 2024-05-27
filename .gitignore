@@ -1,6 +1,8 @@
 # env
+envs
 env
-
+bc_env
+venv
 # DS_Store
 *.DS_Store
 
