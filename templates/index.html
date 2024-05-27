@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Prediction Model</title>
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='styles.css') }}"
+  />
+</head>
+<body>
+    <div class="main-container">
+    <h1>Breast Cancer Prediction Model Using XGBoost Classifier</h1>
+    <form action="/predict" method="POST">
+    <table class="table-container">
+        <h2>To predict whether the patient has a malignant or benign tumor, please fill in the form</h2>
+        <tfoot>
+            <tr>
+                <th><h2>{{ result }}</h2></th>
+            </tr>
+        </tfoot>
+        <tr>
+            <td><label for = "radius_worst">Radius Worst</label></td>
+            <td>
+                <span><input  class="form-control" type="text" name="radius_worst" placeholder="Value range: 7.93 - 36.04" required="required" /></span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for = "texture_worst">Texture Worst</label></td>
+            <td>
+                <span><input  class="form-control" type="text" name="texture_worst" placeholder="Value range: 12.0 - 49.54" required="required" /></span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for = "symmetry_worst">Symmetry Worst</label></td>
+            <td>
+                <span><input  class="form-control" type="text" name="symmetry_worst" placeholder="Value range: 0.16 - 0.66" required="required" /></span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for = "concave_points_mean">Concave Points Mean</label></td>
+            <td>
+                <span><input  class="form-control" type="text" name="concave_points_mean" placeholder="Value range: 0.00 - 0.20" required="required" /></span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for = "area_worst">Area Worst</label></td>
+            <td>
+                <span><input  class="form-control" type="text" name="area_worst" placeholder="Value range: 185.2 - 4254.00" required="required" /></span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for = "concave_points_worst">Concave Points Worst</label></td>
+            <td>
+                <span><input  class="form-control" type="text" name="concave_points_worst" placeholder="Value range: 0.00 - 0.29" required="required" /></span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for = "concavity_worst">Concavity Worst</label></td>
+            <td>
+                <span><input  class="form-control" type="text" name="concavity_worst" placeholder="Value range: 0.00 - 1.25" required="required" /></span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for = "area_se">Area SE</label></td>
+            <td>
+                <span><input  class="form-control" type="text" name="area_se" placeholder="Value range: 6.80 - 542.20" required="required" /></span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for = "perimeter_worst">Perimeter Worst</label></td>
+            <td>
+                <span><input  class="form-control" type="text" name="perimeter_worst" placeholder="Value range: 50.41 - 251.20" required="required" /></span>
+            </td>
+        </tr>
+    </table>
+    <div class="submit-button">
+        <input type="submit" value="PREDICT">
+    </div>
+    </form>
+    </div>
+</body>
+</html>

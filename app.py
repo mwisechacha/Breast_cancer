@@ -3,7 +3,7 @@ from joblib import load
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
-clf = load('models/breast-cancer-xgboostClassifier.joblib')
+clf = load('breast-cancer-xgboostClassifier.joblib')
 scaler = StandardScaler()
 
 app = Flask(__name__)
@@ -15,23 +15,20 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    print("Predict route hit")
     features = [float(x) for x in request.form.values()]
-    final_features = [np.array(features)]
+    print(len(features))
+    selected_features = [features[i] for i in range(9)]
+    scaler.fit(selected_features)
+    final_features = np.array(selected_features).reshape(1, -1)
     final_features = scaler.transform(final_features)    
     preds = clf.predict(final_features)
-    if preds[0] == 1:
-        return render_template('index.html', prediction_text='The patient has breast cancer')
+    
+    if preds[0]== 1:
+        result = 'Patients tumor is malignant, patient has breast cancer'
     else:
-        return render_template('index.html', prediction_text='The patient does not have breast cancer')
-
-@app.route('/predict_api',methods=['POST'])
-def predict_api():
-
-    data = request.get_json(force=True)
-    prediction = model.predict([np.array(list(data.values()))])
-
-    output = prediction[0]
-    return jsonify(output)
+        result = "Patient's tumor is benign, patient doesn't have breast cancer"
+    return render_template('results.html', result=result)
 
 if __name__ == '__main__':
     app.run(debug=True)
