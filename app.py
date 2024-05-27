@@ -4,7 +4,9 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 
 clf = load('breast-cancer-xgboostClassifier.joblib')
-scaler = StandardScaler()
+scaler = load('breast-cancer-standardScaler.joblib')
+
+selected_feature_indices = [21, 22, 8, 24, 28, 27, 29, 14, 23]
 
 app = Flask(__name__)
 
@@ -17,13 +19,17 @@ def home():
 def predict():
     print("Predict route hit")
     features = [float(x) for x in request.form.values()]
-    print(len(features))
-    selected_features = [features[i] for i in range(9)]
-    scaler.fit(selected_features)
-    final_features = np.array(selected_features).reshape(1, -1)
-    final_features = scaler.transform(final_features)    
+    print(features)  # Print the features to verify
+
+    # Check that the length of features matches the expected number
+    if len(features) != 9:
+        return "Invalid number of features submitted. Expected 9 features."
+
+    # Select the features based on the specified indices
+    selected_features = [features[i] for i in selected_feature_indices]
+    final_features = np.array(selected_features).reshape(1, -1)  # Reshape to 2D array
+    final_features = scaler.transform(final_features)  # Transform using the pre-fitted scaler
     preds = clf.predict(final_features)
-    
     if preds[0]== 1:
         result = 'Patients tumor is malignant, patient has breast cancer'
     else:
