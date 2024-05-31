@@ -15,8 +15,8 @@
         <h1 style="text-align: center;">Breast Cancer Prediction Model Using XGBoost Classifier</h1>
 
         <div class="main-container">
-            <form action="/predict" method="POST" id="predictionForm">
-                <div style='display:flex; gap: 10rem; margin-top: 20px; align-items: center;'  >
+            <form action="/predict" method="POST">
+                <div>
                     <div>
                         <h2>To predict whether the patient has a malignant or benign tumor, please fill in the form</h2>
                         <table class="table-container">
@@ -203,14 +203,15 @@
                             </tr>      
                         </table>
                     </div>
-                    <div >
-                        <h2 id="result" class="hidden">Result</h2>
-                        <p class='result'>{{result}}</p>
-                    </div>
+
                 </div>
         
             <div class="submit-button">
-                <button type="submit" >PREDICT</button>
+                <input type="submit" value="PREDICT">
+            </div>
+            <div>
+                <h2 id="result" class="hidden">Result</h2>
+                <p class='result'>{{result}}</p>
             </div>
         
             </form>
