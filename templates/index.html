@@ -8,203 +8,215 @@
     rel="stylesheet"
     href="{{ url_for('static', filename='styles.css') }}"
   />
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
 </head>
 <body>
-    <div class="main-container">
-    <h1>Breast Cancer Prediction Model Using XGBoost Classifier</h1>
-    <form action="/predict" method="POST">
-    <table class="table-container">
-        <h2>To predict whether the patient has a malignant or benign tumor, please fill in the form</h2>
-        <tfoot>
-            <tr>
-                <th><h2>{{ result }}</h2></th>
-            </tr>
-        </tfoot>
-        <tr>
-            <td><label for = "radius_worst">Radius Worst</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="radius_worst" placeholder="Value range: 7.93 - 36.04" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "texture_worst">Texture Worst</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="texture_worst" placeholder="Value range: 12.0 - 49.54" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "symmetry_worst">Symmetry Worst</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="symmetry_worst" placeholder="Value range: 0.16 - 0.66" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "concave_points_mean">Concave Points Mean</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="concave_points_mean" placeholder="Value range: 0.00 - 0.20" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "area_worst">Area Worst</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="area_worst" placeholder="Value range: 185.2 - 4254.00" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "concave_points_worst">Concave Points Worst</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="concave_points_worst" placeholder="Value range: 0.00 - 0.29" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "concavity_worst">Concavity Worst</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="concavity_worst" placeholder="Value range: 0.00 - 1.25" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "area_se">Area SE</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="area_se" placeholder="Value range: 6.80 - 542.20" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "perimeter_worst">Perimeter Worst</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="perimeter_worst" placeholder="Value range: 50.41 - 251.20" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "radius_mean">Radius Mean</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="radius_mean" placeholder="Value range: 6.98 - 28.11" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "concavity_mean">Concavity Mean</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="concavity_mean" placeholder="Value range: 0.00 - 0.43" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "compactness_worst">Compactness Worst</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="compactness_worst" placeholder="Value range: 0.03 - 1.06" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "smoothness_worst">Smoothness Worst</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="smoothness_worst" placeholder="Value range: 0.07 - 0.22" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "texture_mean">Texture Mean</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="texture_mean" placeholder="Value range: 9.71 - 39.28" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "area_mean">Area Mean</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="area_mean" placeholder="Value range: 143.5 - 2501.0" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "smoothness_mean">Smoothness Mean</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="smoothness_mean" placeholder="Value range: 0.05 - 0.16" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "concavity_se">Concavity SE</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="concavity_se" placeholder="Value range: 0.00 - 0.40" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "compactness_mean">Compactness Mean</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="compactness_mean" placeholder="Value range: 0.02 - 0.35" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "fractal_dimension_worst">Fractal Dimension Worst</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="fractal_dimension_worst" placeholder="Value range: 0.06 - 0.21" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "radius_se">Radius SE</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="radius_se" placeholder="Value range: 0.11 - 2.87" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "perimeter_mean">Perimeter Mean</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="perimeter_mean" placeholder="Value range: 43.79 - 188.5" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "compactness_se">Compactness SE</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="compactness_se" placeholder="Value range: 0.01 - 0.14" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "smoothness_se">Smoothness SE</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="smoothness_se" placeholder="Value range: 0.01 - 0.03" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "symmetry_mean">Symmetry Mean</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="symmetry_mean" placeholder="Value range: 0.11 - 0.30" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "fractal_dimension_mean">Fractal Dimension Mean</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="fractal_dimension_mean" placeholder="Value range: 0.05 - 0.10" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "fractal_dimension_se">Fractal Dimension SE</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="fractal_dimension_se" placeholder="Value range: 0.00 - 0.03" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "texture_se">Texture SE</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="texture_se" placeholder="Value range: 0.36 - 4.88" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "perimeter_se">Perimeter SE</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="perimeter_se" placeholder="Value range: 0.76 - 21.98" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "symmetry_se">Symmetry SE</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="symmetry_se" placeholder="Value range: 0.01 - 0.08" required="required" /></span>
-            </td>
-        </tr>
-        <tr>
-            <td><label for = "concave_points_se">Concave points SE</label></td>
-            <td>
-                <span><input  class="form-control" type="text" name="concave_points_se" placeholder="Value range: 0.05 - 0.16" required="required" /></span>
-            </td>
-        </tr>        
-    </table>
-    <div class="submit-button">
-        <input type="submit" value="PREDICT">
+    <div class='parent'>
+        <h1 style="text-align: center;">Breast Cancer Prediction Model Using XGBoost Classifier</h1>
+
+        <div class="main-container">
+            <form action="/predict" method="POST" id="predictionForm">
+                <div style='display:flex; gap: 10rem; margin-top: 20px; align-items: center;'  >
+                    <div>
+                        <h2>To predict whether the patient has a malignant or benign tumor, please fill in the form</h2>
+                        <table class="table-container">
+                            <tr>
+                                <td><label for = "radius_worst">Radius Worst</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="radius_worst" placeholder="Value range: 7.93 - 36.04" required="required" /></span>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td><label for = "concave_points_mean">Concave Points Mean</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="concave_points_mean" placeholder="Value range: 0.00 - 0.20" required="required" /></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for = "area_worst">Area Worst</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="area_worst" placeholder="Value range: 185.2 - 4254.00" required="required" /></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for = "concave_points_worst">Concave Points Worst</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="concave_points_worst" placeholder="Value range: 0.00 - 0.29" required="required" /></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for = "concavity_worst">Concavity Worst</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="concavity_worst" placeholder="Value range: 0.00 - 1.25" required="required" /></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for = "perimeter_worst">Perimeter Worst</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="perimeter_worst" placeholder="Value range: 50.41 - 251.20" required="required" /></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "area_se" hidden>Area SE</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="area_se" placeholder="Value range: 6.80 - 542.20" required="required" value="6.80" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "radius_mean">Radius Mean</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="radius_mean" placeholder="Value range: 6.98 - 28.11" required="required" value="6.98" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for = "area_mean">Area Mean</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="area_mean" placeholder="Value range: 143.5 - 2501.0" required="required" /></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "smoothness_mean" hidden>Smoothness Mean</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="smoothness_mean" placeholder="Value range: 0.05 - 0.16" required="required" value="0.05" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "concavity_se" hidden>Concavity SE</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="concavity_se" placeholder="Value range: 0.00 - 0.40" required="required" value="0.00" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "compactness_mean" hidden>Compactness Mean</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="compactness_mean" placeholder="Value range: 0.02 - 0.35" required="required" value="0.02" hidden /></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "fractal_dimension_worst" hidden>Fractal Dimension Worst</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="fractal_dimension_worst" placeholder="Value range: 0.06 - 0.21" required="required"  value="0.06" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "radius_se">Radius SE</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="radius_se" placeholder="Value range: 0.11 - 2.87" required="required" value="0.11" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "perimeter_mean">Perimeter Mean</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="perimeter_mean" placeholder="Value range: 43.79 - 188.5" required="required"  value="43.79" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "compactness_se">Compactness SE</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="compactness_se" placeholder="Value range: 0.01 - 0.14" required="required" value="0.01" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "smoothness_se">Smoothness SE</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="smoothness_se" placeholder="Value range: 0.01 - 0.03" required="required" value="0.01" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "symmetry_mean">Symmetry Mean</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="symmetry_mean" placeholder="Value range: 0.11 - 0.30" required="required" value="0.11" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "fractal_dimension_mean">Fractal Dimension Mean</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="fractal_dimension_mean" placeholder="Value range: 0.05 - 0.10" required="required" value="0.05" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "fractal_dimension_se">Fractal Dimension SE</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="fractal_dimension_se" placeholder="Value range: 0.00 - 0.03" required="required" value="0.00" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "texture_se">Texture SE</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="texture_se" placeholder="Value range: 0.36 - 4.88" required="required"  value="0.36" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "perimeter_se">Perimeter SE</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="perimeter_se" placeholder="Value range: 0.76 - 21.98" required="required" value="0.76" hidden /></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "symmetry_se">Symmetry SE</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="symmetry_se" placeholder="Value range: 0.01 - 0.08" required="required" value="0.01" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "concave_points_se">Concave points SE</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="concave_points_se" placeholder="Value range: 0.05 - 0.16" required="required"  value="0.05" hidden/></span>
+                                </td>
+                            </tr> 
+                            <tr hidden>
+                                <td><label for = "texture_worst" hidden>Texture Worst</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="texture_worst" placeholder="Value range: 12.0 - 49.54" required="required" value="12.0" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "symmetry_worst" hidden>Symmetry Worst</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="symmetry_worst" placeholder="Value range: 0.16 - 0.66" required="required" value="0.16" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "concavity_mean" hidden>Concavity Mean</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="concavity_mean" placeholder="Value range: 0.00 - 0.43" required="required" value="0.00" hidden/></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "compactness_worst" hidden>Compactness Worst</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="compactness_worst" placeholder="Value range: 0.03 - 1.06" required="required" value="0.03" hidden /></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "smoothness_worst" hidden>Smoothness Worst</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="smoothness_worst" placeholder="Value range: 0.07 - 0.22" required="required" value="0.07" hidden /></span>
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <td><label for = "texture_mean" hidden>Texture Mean</label></td>
+                                <td>
+                                    <span><input  class="form-control" type="text" name="texture_mean" placeholder="Value range: 9.71 - 39.28" required="required" value="9.71" hidden/></span>
+                                </td>
+                            </tr>      
+                        </table>
+                    </div>
+                    <div >
+                        <h2 id="result" class="hidden">Result</h2>
+                        <p class='result'>{{result}}</p>
+                    </div>
+                </div>
+        
+            <div class="submit-button">
+                <button type="submit" >PREDICT</button>
+            </div>
+        
+            </form>
+            </div>
+
     </div>
-    </form>
-    </div>
+
 </body>
 </html>
