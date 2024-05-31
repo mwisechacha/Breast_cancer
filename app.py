@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 clf = load('breast-cancer-xgboostClassifier.joblib')
 scaler = load('breast-cancer-standardScaler.joblib')
 
-selected_feature_indices = [21, 22, 8, 24, 28, 27, 29, 14, 23]
+selected_feature_indices = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
 app = Flask(__name__)
 
